@@ -694,13 +694,20 @@
       primary_action_color: '#d4af37',
       secondary_action_color: '#f4d03f'
     };
+  
+   // Data SDK Handler
+    const dataHandler = {
+      onDataChanged(data) {
+        allRsvpData = data;
+        updateStatistics();
+      }
+    };
 
-// Google Sheet 
    let allRsvpData = [];
 
 async function loadRsvpData() {
 
-  const res = await fetch("https://script.google.com/macros/s/AKfycbyKeDlAdThNmz4m-c-xJQ7dzk4L2Q55J7VdvvOY2JP9yGaISaR5VYxhO2vRoRrQLcguuQ/exec");
+  const res = await fetch("https://script.google.com/macros/s/AKfycbwembHDfx2w6wiVIZ7HZ9KTcjWKjjo9XpDHdk2n7IHQuGshbp9HAnv8ihUij2bub33dJQ/exec");
   
   const data = await res.json();
 
@@ -711,8 +718,19 @@ async function loadRsvpData() {
 
 loadRsvpData();
 
-   // Update Statistik Google Sheet
-   function updateStatistics() {
+    // Update Statistics
+    function updateStatistics() {
+      const total = allRsvpData.length;
+      const confirmed = allRsvpData.filter(item => item.attendance === 'hadir').length;
+      const notConfirmed = allRsvpData.filter(item => item.attendance === 'tidak').length;
+      const totalPersons = allRsvpData.reduce((sum, item) => sum + parseInt(item.guests || 1), 0);
+      
+      document.getElementById('stat-total').textContent = total;
+      document.getElementById('stat-confirmed').textContent = confirmed;
+      document.getElementById('stat-not-confirmed').textContent = notConfirmed;
+      document.getElementById('stat-persons').textContent = totalPersons;
+
+     function updateStatistics() {
 
   const total = allRsvpData.length;
 
@@ -741,29 +759,8 @@ loadRsvpData();
   document.getElementById('progress-bar').style.width = confirmationRate + '%';
   document.getElementById('progress-percent').textContent = confirmationRate;
 }
-   setInterval(loadRsvpData, 10000);
-
-   
-   // Data SDK Handler
-    const dataHandler = {
-      onDataChanged(data) {
-        allRsvpData = data;
-        updateStatistics();
-      }
-    };
-
-    // Update Statistics
-    function updateStatistics() {
-      const total = allRsvpData.length;
-      const confirmed = allRsvpData.filter(item => item.attendance === 'hadir').length;
-      const notConfirmed = allRsvpData.filter(item => item.attendance === 'tidak').length;
-      const totalPersons = allRsvpData.reduce((sum, item) => sum + parseInt(item.guests || 1), 0);
-      
-      document.getElementById('stat-total').textContent = total;
-      document.getElementById('stat-confirmed').textContent = confirmed;
-      document.getElementById('stat-not-confirmed').textContent = notConfirmed;
-      document.getElementById('stat-persons').textContent = totalPersons;
-      
+      setInterval(loadRsvpData, 10000);
+     
       // Update progress bar
       const confirmationRate = total > 0 ? Math.round((confirmed / total) * 100) : 0;
       document.getElementById('progress-bar').style.width = confirmationRate + '%';
