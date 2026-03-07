@@ -902,9 +902,7 @@
       
       const result = await fetch("https://script.google.com/macros/s/AKfycbwembHDfx2w6wiVIZ7HZ9KTcjWKjjo9XpDHdk2n7IHQuGshbp9HAnv8ihUij2bub33dJQ/exec", {
   method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
+  mode: "no-cors",
   body: JSON.stringify(rsvpData)
 });
 
