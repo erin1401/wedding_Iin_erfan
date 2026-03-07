@@ -899,7 +899,9 @@
       submitBtn.textContent = 'Mengirim...';
       submitBtn.disabled = true;
       
-      const result = await const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz0DpUY_gGtbJm4LXNmzDVRv1B9T8EIqMjXPpGN7VnIQNFq1Fyh_OoiC9NP-7Gbm8EB0w/exec";
+     const result = await window.dataSdk.create(rsvpData);
+       
+     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz0DpUY_gGtbJm4LXNmzDVRv1B9T8EIqMjXPpGN7VnIQNFq1Fyh_OoiC9NP-7Gbm8EB0w/exec";
 
 document.getElementById('rsvpForm').addEventListener('submit', async function(e) {
 
