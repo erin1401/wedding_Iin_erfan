@@ -599,6 +599,25 @@
     </footer>
    </div>
   </div>
+  <audio id="bg-music" loop>
+  <source src="musik.mp3" type="audio/mpeg">
+  </audio>
+  <script>
+document.addEventListener("DOMContentLoaded", function() {
+    var music = document.getElementById("bg-music");
+
+    function playMusic() {
+        music.play().catch(function(e){
+            console.log("Autoplay diblokir browser");
+        });
+    }
+
+    // Jalankan musik setelah user klik dimana saja
+    document.body.addEventListener("click", function() {
+        playMusic();
+    }, { once: true });
+});
+</script>
   <script>
    // Data management
     let allRsvpData = [];
@@ -856,7 +875,7 @@
     // Initialize countdown
     updateCountdown();
     setInterval(updateCountdown, 1000);
-
+   
     // Intersection Observer for scroll animations
     const observerOptions = {
       threshold: 0.1,
