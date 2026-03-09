@@ -599,10 +599,6 @@
     </footer>
    </div>
   </div>
-  <audio id="bgMusic" loop>
-  <source src="musik.mp3" type="audio/mp3">
-</audio>
-  <script src="script.js"></script>
   <script>
    // Data management
     let allRsvpData = [];
@@ -741,22 +737,13 @@
     // Wedding date for countdown
     const weddingDate = new Date('2026-04-04T08:00:00').getTime();
 
-    // Open invitation function
+  // Open invitation function
     function openInvitation() {
-  const cover = document.getElementById('cover');
-  const mainContent = document.getElementById('mainContent');
-
-  if (cover) cover.style.display = 'none';
-  if (mainContent) mainContent.classList.remove('hidden');
-
-  // Play music safely
-  const music = document.getElementById("bgMusic");
-  if (music) {
-    music.play().catch(function(err){
-      console.log("Music autoplay diblokir browser:", err);
-    });
-  }
-}
+      const cover = document.getElementById('cover');
+      const mainContent = document.getElementById('mainContent');
+      
+      cover.style.display = 'none';
+      mainContent.classList.remove('hidden');
       
       // Trigger animations for visible elements
       setTimeout(() => {
