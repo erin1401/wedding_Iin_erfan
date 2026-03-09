@@ -599,10 +599,10 @@
     </footer>
    </div>
   </div>
-  <!-- AUDIO MUSIK -->
-<audio id="bgMusic" loop>
+  <audio id="bgMusic" loop>
   <source src="musik.mp3" type="audio/mp3">
 </audio>
+  <script src="script.js"></script>
   <script>
    // Data management
     let allRsvpData = [];
@@ -743,16 +743,19 @@
 
     // Open invitation function
     function openInvitation() {
-      const cover = document.getElementById('cover');
-      const mainContent = document.getElementById('mainContent');
-      
-      cover.style.display = 'none';
-      mainContent.classList.remove('hidden');
-     
-      // PLAY MUSIC
-  const music = document.getElementById("bgMusic");
-  music.play().catch(() => {});
+  const cover = document.getElementById('cover');
+  const mainContent = document.getElementById('mainContent');
 
+  if (cover) cover.style.display = 'none';
+  if (mainContent) mainContent.classList.remove('hidden');
+
+  // Play music safely
+  const music = document.getElementById("bgMusic");
+  if (music) {
+    music.play().catch(function(err){
+      console.log("Music autoplay diblokir browser:", err);
+    });
+  }
 }
       
       // Trigger animations for visible elements
