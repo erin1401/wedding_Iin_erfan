@@ -271,7 +271,7 @@
         <div class="inline-block bg-black/40 backdrop-blur-md px-6 py-4 rounded-2xl">
         <p class="text-yellow-100/70 text-sm tracking-wider mb-2">Kepada Yth.</p>
         <p class="text-yellow-100 font-heading text-xl md:text-2xl">Bapak/Ibu/Saudara/i</p>
-        <p class="text-yellow-200 font-heading text-2xl md:text-3xl mt-1 font-semibold">
+        <p id="guest-name" class="text-yellow-200 font-heading text-2xl md:text-3xl mt-1 font-semibold">
             Tamu Undangan
         </p>
     </div><!-- Open Invitation Button --> <button id="openBtn" onclick="openInvitation()" class="mt-12 btn-gold px-8 py-4 rounded-full font-heading text-lg tracking-wider flex items-center gap-3 animate-fade-in-up delay-600 animate-float">
@@ -902,6 +902,14 @@ document.addEventListener("DOMContentLoaded", function() {
         });
       }, 500);
     });
+   <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const guestName = urlParams.get('to');
+
+    if (guestName) {
+        document.getElementById('guest-name').textContent = "Bapak/Ibu " + decodeURIComponent(guestName);
+    }
+</script>
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d8747b823d3ea82',t:'MTc3Mjg2MjE4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
